@@ -57,7 +57,12 @@ strong_cleaner('Err@#%$ors sho@#$@#$uld nev1!$#@er pass sile&I&&*(ntly')
 
 
 def extracto(word):
-    print(re.sub(r"^'|'$|\d", '', word))
+    numbers = re.sub(r"\D|\s*", '', word)
+    numb_list =list(numbers)
+    count = 0
+    for number in numb_list:
+        count += int(number)
+    print(count)
 
 extracto("1S2pe3cia4l ca5ses ar6en't sp7ecial en8ough to b9reak the r0ules.")
 extracto("2S4pe6cia8l ca0ses ar2en't sp4ecial en6ough to b8reak the r0ules.")
