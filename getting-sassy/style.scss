@@ -1,0 +1,89 @@
+$imageList: url(https://visualhunt.com/photos/xl/7/flower-bouquet-bunch-daisys.jpg), url(https://visualhunt.com/photos/l/7/sky-silhouette-star.jpg), url(https://visualhunt.com/photos/l/7/animal-kitten-pet.jpg);
+body{
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin colorChange($string, $color1, $color2){
+    @keyframes #{$string}{
+      0% {background-color: #{$color1};}
+      50% {background-color: #{$color2};}
+      100% {background-color: #{$color1};}
+    }
+
+  }
+
+@mixin myBox{
+    display: flex;
+    flex-direction: column;
+    margin: 1.7em;
+    background-color: rgba(grey, .1);
+    padding: 2em;
+    border-radius: 10px;
+}
+
+@include colorChange('changer', #9c27b0, #2196f3);
+  
+header{
+  background-color: #9c27b0 ;
+
+  animation-name: changer;
+  animation-duration: 10s;
+  animation-iteration-count: infinite;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  height: 95vh;
+  
+}
+
+.project-list{
+  div{
+    @include myBox;
+    h2{
+      align-self: center;      
+    }
+    ul{
+      display: flex;
+      flex-direction: row;
+      list-style: none;
+      justify-content: space-around;
+      
+      
+      @for $i from 1 through length($imageList) {
+          li:nth-child(#{$i}){
+            background: nth($imageList, $i);
+            background-size: cover;
+            width: 10em;
+            height: 7em;
+           }
+        li{
+          border: solid;
+        }
+      }
+    }
+  }
+}
+
+.articles{
+  article, div{
+    @include myBox;
+  }
+}
+
+footer{
+   background: linear-gradient(270deg, #2196f3, #9c27b0);
+    background-image: linear-gradient(270deg, rgb(33, 150, 243), rgb(156, 39, 176));
+  animation-name: changer;
+  animation-duration: 10s;
+  animation-iteration-count: infinite;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  height:70vh;
+  background-size: 400% 400%;
+  align-items: center;
+  color: #fff;
+}
