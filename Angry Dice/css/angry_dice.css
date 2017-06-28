@@ -1,0 +1,39 @@
+#game {
+    display: flex;
+    justify-content: center;
+}
+
+#die1, #die2 {
+    margin: 10px;
+    border: 1px solid black;
+    padding: 5px;
+    cursor: pointer;
+}
+
+button{
+    font-size: 25px;
+}
+
+#roll{
+    margin-right: 2em;
+    padding-left: 2em;
+    padding-right: 2em;
+}
+
+#round{
+    font-size: 25px;
+    display: flex;
+    justify-content: center;
+
+}
+
+#gameButtons{
+    display: flex;
+    justify-content: center;
+
+}
+
+h1{
+    display: flex;
+    justify-content: center;
+}
