@@ -30,8 +30,8 @@ function changeRound() {
 function releaseHold() {
     die1.held = false;
     die2.held = false;
-    $('#die1').css(borderColor, 'black');
-    $('#die2').css(borderColor, 'black');
+    $('#die1').css('borderColor', 'black');
+    $('#die2').css('borderColor', 'black');
 
 }
 
