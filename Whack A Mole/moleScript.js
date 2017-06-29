@@ -1,13 +1,22 @@
 /**
  * Created by greenman on 6/29/17.
  */
-$('.hole').html("<img src='images/hole.jpg' />");
-
+// $('.hole').html("<img src='hole.jpg' />");
+var timer;
+var interval = 1000;
+var score = 0;
+var filledHoles = [];
+var highScores =[];
 
 function randomHole() {
-    var hole = Math.floor(Math.random() * 100) % 20 +1;
-    console.log(hole);
-    return '#' + hole;
+    var emptyHole = false;
+    while (emptyHole === false){
+        var hole = Math.floor(Math.random() * 100) % 20 + 1;
+        if ($.inArray(hole, filledHoles) === -1) {
+        emptyHole = true;}
+    }
+    console.log('hole: ' + hole);
+    return  hole;
 }
 
 function randomAlien() {
@@ -20,22 +29,68 @@ function randomAlien() {
     return alien;
 }
 
-var timer;
-var interval = 3000;
+
 
 $('#start').click(function()
 {
-    timer = setInterval(function () {
-
-        var alien = randomAlien();
-        var hole = randomHole();
-        console.log(alien);
-        console.log(hole);
-        $(hole).html(alien)
-    }, interval);
+    $('#playerScore').html(score);
+    timer = setInterval(set, interval);
 });
+
+function set() {
+
+        var alien = "<img src='alien.png'/>";
+        var hole = randomHole();
+        // console.log($.inArray(hole, filledHoles))
+
+            $('#' + hole).html(alien);
+            filledHoles.push(hole);
+        console.log(filledHoles.length)
+        if (filledHoles.length === 20){
+            gameOver();}
+        if(interval > 100){interval -= 10;}
+
+        else  {interval = interval/2;}
+        console.log(interval);
+        clearInterval(timer);
+        timer = setInterval(set, interval);
+    }
 
 $("#stop").click(function () {
     clearInterval(timer);
+    highScores.push(score);
+    highScores.sort();
+    highScores.reverse();
+    $('#scoreList').html('');
+    for (var i =0; i < highScores.length; ++i){
+        $('#scoreList').append('<li>'+ highScores[i] + '</li>');
+    }
+    score = 0;
 });
 
+$(".hole").click(function () {
+    var hole = parseInt($(this).attr('id'));
+
+
+    if($.inArray(hole, filledHoles) > -1){
+        score += 100;
+
+        filledHoles.splice(filledHoles.indexOf(hole), 1);
+        $('#' + hole).html("");
+    } else {score -= 50}
+    $('#playerScore').html(score);
+
+})
+
+function gameOver() {
+    clearInterval(timer);
+    highScores.push(score);
+    highScores.sort();
+    $('#scoreList').html('');
+    for (var i =0; i < highScores.length; ++i){
+        $('#scoreList').append(highScores[i]);
+    }
+    score = 0;
+    clearInterval(timer);
+
+}
