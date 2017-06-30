@@ -85,3 +85,16 @@ h1{
     font-size: 2.5em;
 
 }
+#gameOver{
+    position: absolute;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+#gameOver img{
+    position: absolute;
+
+    z-index: 1000;
+    height: 45vh;
+    width: 58vh;
+}

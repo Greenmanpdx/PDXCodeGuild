@@ -14,6 +14,7 @@ function randomHole() {
         var hole = Math.floor(Math.random() * 100) % 20 + 1;
         if ($.inArray(hole, filledHoles) === -1) {
         emptyHole = true;}
+        console.log("while");
     }
     console.log('hole: ' + hole);
     return  hole;
@@ -33,6 +34,10 @@ function randomAlien() {
 
 $('#start').click(function()
 {
+    for(var i =1; i < 20; ++i){
+        $("#" +i).html('');
+    }
+    $('#gameOver').html("");
     $('#playerScore').html(score);
     timer = setInterval(set, interval);
 });
@@ -40,32 +45,33 @@ $('#start').click(function()
 function set() {
 
         var alien = "<img src='alien.png'/>";
-        var hole = randomHole();
-        // console.log($.inArray(hole, filledHoles))
+
+        console.log(filledHoles.length);
+        if (filledHoles.length === 20){
+            gameOver();
+
+
+        }else {
+            var hole = randomHole();
 
             $('#' + hole).html(alien);
             filledHoles.push(hole);
-        console.log(filledHoles.length)
-        if (filledHoles.length === 20){
-            gameOver();}
-        if(interval > 100){interval -= 10;}
+            if (interval > 100) {
+                interval -= 10;
+            }
 
-        else  {interval = interval/2;}
-        console.log(interval);
-        clearInterval(timer);
-        timer = setInterval(set, interval);
+            else {
+                interval = interval / 2;
+            }
+            // console.log(interval);
+            clearInterval(timer);
+            timer = setInterval(set, interval);
+        }
     }
 
 $("#stop").click(function () {
-    clearInterval(timer);
-    highScores.push(score);
-    highScores.sort();
-    highScores.reverse();
-    $('#scoreList').html('');
-    for (var i =0; i < highScores.length; ++i){
-        $('#scoreList').append('<li>'+ highScores[i] + '</li>');
-    }
-    score = 0;
+    gameOver();
+
 });
 
 $(".hole").click(function () {
@@ -76,7 +82,7 @@ $(".hole").click(function () {
         score += 100;
 
         filledHoles.splice(filledHoles.indexOf(hole), 1);
-        $('#' + hole).html("");
+        $('#' + hole).html("<img src='splat.png'/>");
     } else {score -= 50}
     $('#playerScore').html(score);
 
@@ -86,11 +92,15 @@ function gameOver() {
     clearInterval(timer);
     highScores.push(score);
     highScores.sort();
+    highScores.reverse();
     $('#scoreList').html('');
+
     for (var i =0; i < highScores.length; ++i){
-        $('#scoreList').append(highScores[i]);
+        $('#scoreList').append('<li>'+ highScores[i] +'</li>');
+
     }
     score = 0;
-    clearInterval(timer);
+
+    $('#gameOver').html("<img src='gameover.svg'/>");
 
 }
