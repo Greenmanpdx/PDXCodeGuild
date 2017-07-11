@@ -14,17 +14,27 @@ var namesToAges = {
 };
 
 function findRarestValue(names) {
-       var currentCount = 0;
-       var nextCount = 0;
-       var ages = {};
+    var currentCount = 0;
+    var nextCount = 0;
+    var ages = {};
 
-       $.each(names, function (key, value) {
-           if(ages === null){ ages.key = 1}
-           else if(ages.key){ages.key += 1}
-           else {ages.key =1}
-       })
-
+    $.each(names, function (key, value) {
+        if (ages === null) {
+            ages[value] = 1
+        }
+        else if (ages[value]) {
+            ages[value] += 1
+        }
+        else {
+            ages[value] = $.map(names, function (value, key) {
+                return value
+            });
+            ages[value] = 1;
+        }
+    });
+    return Object.keys(ages).reduce(function (a, b) {
+        return ages[a] > ages[b] ? a : b
+    });
 }
 
-findRarestValue(namesToAges);
-console.log(ages);
+console.log(findRarestValue(namesToAges));

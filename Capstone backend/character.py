@@ -27,10 +27,10 @@ class Character:
             return self.initiative == other.initiative
 
 
-
-
 class NPC(Character):
-    def __init__(self, name, initiative_bonus, ac, hp, fort, ref, will):
+    def __init__(self, name, cr, xp, alignment, size, type, initiative_bonus, ac, ac_touch, ac_ff, hp, fort, ref, will,
+                 melee, ranged, space, reach, strength, dex, con, intel, wis, cha, feats, skills, sq, environment,
+                 organization, treasure, group, speed, source):
         self.name = name
         self.initiative_bonus = initiative_bonus
         self.ac = ac
@@ -39,5 +39,29 @@ class NPC(Character):
         self.ref = ref
         self.will = will
         self.initiative = 0
-
-
+        self.cr = cr
+        self.xp = xp
+        self.alignment = alignment
+        self.size = size
+        self.type = type
+        self.ac_touch = ac_touch
+        self.ac_ff = ac_ff
+        self.melee = melee
+        self.ranged = ranged
+        self.space = space
+        self.strength = strength
+        self.dex = dex
+        self.con = con
+        self. intel = intel
+        self.wis = wis
+        self.cha = cha
+        self.feats = feats
+        self.skills = skills
+        self.sq = sq
+        self.environment = environment
+        self.organization = organization
+        self.treasure = treasure
+        self.group = group
+        self.speed = speed
+        self.source = source
+        self.reach = reach
